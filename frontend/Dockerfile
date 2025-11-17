@@ -7,6 +7,7 @@ RUN npm install
 
 COPY . .
 
+COPY serve.json .
 RUN npm run build
 
 # Serve production build using a lightweight server
