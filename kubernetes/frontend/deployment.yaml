@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-frontend-app-deployment
+  labels:
+    app: react-frontend-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: react-frontend-app
+  template:
+    metadata:
+      labels:
+        app: react-frontend-app
+    spec:
+      containers:
+      - name: react-frontend-app
+        image: tapashranjannandi/todo-node-frontend:latest
+        ports:
+        - containerPort: 5173
+

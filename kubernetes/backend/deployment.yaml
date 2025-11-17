@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-backend-deployment
+  labels:
+    app: nodejs-backend-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs-backend-app
+  template:
+    metadata:
+      labels:
+        app: nodejs-backend-app
+    spec:
+      containers:
+      - name: nodejs-backend-app
+        image: tapashranjannandi/node-app-backend:latest
+        env: 
+          - name: PORT
+            value: "5000"
+          - name: MONGODB_URI
+            value: "mongodb+srv://tapashbariflo_db_user:yuYD21YBP1bziUSx@cluster1.ynrsg2p.mongodb.net/myProject?retryWrites=true&w=majority&appName=Cluster1"
+          - name: FRONTEND_URL
+            value: ""
+        ports:
+        - containerPort: 5000
+

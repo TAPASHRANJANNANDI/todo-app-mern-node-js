@@ -7,7 +7,11 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5173
+RUN npm run build
 
-CMD ["npm", "run", "dev", "--", "--host"]
+# Serve production build using a lightweight server
+RUN npm install -g serve
+
+EXPOSE 5173
+CMD ["serve", "-s", "dist", "-l", "5173"]
 
