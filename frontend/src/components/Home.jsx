@@ -3,6 +3,8 @@ import axios from "axios";
 
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+console.log("BACKEND URL:", import.meta.env.BACKEND_URL);
+
 function Home() {
   const [todos, setTodos] = useState([]);
   const [error, setError] = useState(null);
@@ -13,7 +15,7 @@ function Home() {
     const fetchtodos = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/todo/fetch`, {
+        const response = await axios.get(`${import.meta.env.BACKEND_URL}/todo/fetch`, {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
@@ -35,7 +37,7 @@ function Home() {
     if (!newTodo) return;
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/todo/create`,
+        `${import.meta.env.BACKEND_URL}/todo/create`,
         {
           text: newTodo,
           completed: false,
@@ -56,7 +58,7 @@ function Home() {
     const todo = todos.find((t) => t._id === id);
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/todo/update/${id}`,
+        `${import.meta.env.BACKEND_URL}/todo/update/${id}`,
         {
           ...todo,
           completed: !todo.completed,
@@ -74,7 +76,7 @@ function Home() {
 
   const todoDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/todo/delete/${id}`, {
+      await axios.delete(`${import.meta.env.BACKEND_URL}/todo/delete/${id}`, {
         withCredentials: true,
       });
       setTodos(todos.filter((t) => t._id !== id));
@@ -86,7 +88,7 @@ function Home() {
   const navigateTo = useNavigate();
   const logout = async () => {
     try {
-      await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {
+      await axios.get(`${import.meta.env.BACKEND_URL}/user/logout`, {
         withCredentials: true,
       });
       toast.success("User logged out successfully");
