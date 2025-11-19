@@ -3,7 +3,7 @@ import axios from "axios";
 
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-console.log("BACKEND URL:", import.meta.env.BACKEND_URL);
+// console.log("BACKEND URL:", import.meta.env.BACKEND_URL);
 
 function Home() {
   const [todos, setTodos] = useState([]);
@@ -15,12 +15,13 @@ function Home() {
     const fetchtodos = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${import.meta.env.BACKEND_URL}/todo/fetch`, {
+        const response = await axios.get("http://a99b98471fddb48de8fa4639689eb812-255064656.ap-south-1.elb.amazonaws.com:4001/todo/fetch", {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
           },
         });
+      
         console.log(response.data.todos);
         setTodos(response.data.todos);
         setError(null);
@@ -37,7 +38,7 @@ function Home() {
     if (!newTodo) return;
     try {
       const response = await axios.post(
-        `${import.meta.env.BACKEND_URL}/todo/create`,
+        "http://a99b98471fddb48de8fa4639689eb812-255064656.ap-south-1.elb.amazonaws.com:4001/todo/create",
         {
           text: newTodo,
           completed: false,
@@ -58,7 +59,7 @@ function Home() {
     const todo = todos.find((t) => t._id === id);
     try {
       const response = await axios.put(
-        `${import.meta.env.BACKEND_URL}/todo/update/${id}`,
+        "http://a99b98471fddb48de8fa4639689eb812-255064656.ap-south-1.elb.amazonaws.com:4001/todo/update/${id}",
         {
           ...todo,
           completed: !todo.completed,
@@ -76,7 +77,7 @@ function Home() {
 
   const todoDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.BACKEND_URL}/todo/delete/${id}`, {
+      await axios.delete(`http://a99b98471fddb48de8fa4639689eb812-255064656.ap-south-1.elb.amazonaws.com:4001/todo/delete/${id}`, {
         withCredentials: true,
       });
       setTodos(todos.filter((t) => t._id !== id));
@@ -88,7 +89,7 @@ function Home() {
   const navigateTo = useNavigate();
   const logout = async () => {
     try {
-      await axios.get(`${import.meta.env.BACKEND_URL}/user/logout`, {
+      await axios.get("http://a99b98471fddb48de8fa4639689eb812-255064656.ap-south-1.elb.amazonaws.com:4001/user/logout", {
         withCredentials: true,
       });
       toast.success("User logged out successfully");

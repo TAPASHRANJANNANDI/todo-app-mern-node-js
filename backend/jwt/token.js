@@ -26,7 +26,7 @@ export const generateTokenAndSaveInCookies = async (userId, res) => {
 
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: true,          // REQUIRED when sameSite is "none"
+    secure: false,          // REQUIRED when sameSite is "none"
     sameSite: "none",      // needed because frontend & backend are on different domains
     path: "/",
   });

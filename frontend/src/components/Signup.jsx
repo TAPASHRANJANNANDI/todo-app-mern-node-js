@@ -13,7 +13,7 @@ function Signup() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${import.meta.env.BACKEND_URL}/user/signup`,
+        "http://a99b98471fddb48de8fa4639689eb812-255064656.ap-south-1.elb.amazonaws.com:4001/user/signup",
         {
           username,
           email,

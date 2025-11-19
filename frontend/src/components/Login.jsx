@@ -12,7 +12,7 @@ function Login() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${import.meta.env.BACKEND_URL}/user/login`,
+        "http://a99b98471fddb48de8fa4639689eb812-255064656.ap-south-1.elb.amazonaws.com:4001/user/login",
         {
           email,
           password,
